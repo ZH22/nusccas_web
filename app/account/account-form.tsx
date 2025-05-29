@@ -2,6 +2,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { type User } from '@supabase/supabase-js'
+import { redirect } from 'next/navigation'
+
 // ...
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient()
@@ -59,6 +61,14 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
   }
 
+  async function localSignout() {
+    const {error} = await supabase.auth.signOut({ scope: 'local' });
+    if (error) {
+      alert("Error Signing Out")
+    }
+
+    redirect('/');
+  }
 
   //  Page Tsx Content ===================================================
   return (
@@ -88,11 +98,9 @@ export default function AccountForm({ user }: { user: User | null }) {
         </button>
       </div> 
       <div>
-        <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
-            Sign out
-          </button>
-        </form>
+        <button className="button block" onClick={() => localSignout()}>
+          Sign out
+        </button>
       </div>
     </div>
   )
