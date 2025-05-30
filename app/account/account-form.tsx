@@ -2,10 +2,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { type User } from '@supabase/supabase-js'
-import { redirect } from 'next/navigation'
+import { logout } from '../logout/actions'
+import { useRouter } from 'next/router'
 
 // ...
 export default function AccountForm({ user }: { user: User | null }) {
+
   const supabase = createClient()
   const [loading, setLoading] = useState(true)
   
@@ -37,6 +39,7 @@ export default function AccountForm({ user }: { user: User | null }) {
   // Performs after page renders =======================================
   useEffect(() => {
     getProfile()
+
   }, [user, getProfile])
   
   // Update Profile Function (Ignored for now) ===========================
@@ -59,15 +62,6 @@ export default function AccountForm({ user }: { user: User | null }) {
     } finally {
       setLoading(false)
     }
-  }
-
-  async function localSignout() {
-    const {error} = await supabase.auth.signOut({ scope: 'local' });
-    if (error) {
-      alert("Error Signing Out")
-    }
-
-    redirect('/');
   }
 
   //  Page Tsx Content ===================================================
@@ -98,7 +92,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         </button>
       </div> 
       <div>
-        <button className="button block" onClick={() => localSignout()}>
+        <button className="button block" onClick={() => logout()}>
           Sign out
         </button>
       </div>

@@ -21,7 +21,9 @@ export async function login(formData: FormData) {
     redirect('/error')
   }
 
+  
   revalidatePath('/', 'layout')
-  redirect('/')
-}
+  redirect('/login/refresh-relay?return=/account&reload=true') 
+  
+} 
 
