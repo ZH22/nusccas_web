@@ -33,6 +33,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         setFirstName(data.first_name)
       }
     } catch (error) {
+      console.log(error)
       alert('Error loading user data!')
     } finally {
       setLoading(false)

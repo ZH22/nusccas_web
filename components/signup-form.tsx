@@ -117,7 +117,7 @@ interface SignupFormFieldProps {
   placeholder: string;
   description?: string;
   inputType?: string;
-  formControl: Control<z.infer<typeof formSchema>, any>;
+  formControl: Control<z.infer<typeof formSchema>>;
 }
 
 const SignupFormField: React.FC<SignupFormFieldProps> = ({
