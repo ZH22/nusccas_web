@@ -13,7 +13,7 @@ export function Navbar() {
     return (
       <nav className="flex justify-between">
       <ul className="flex gap-5">
-
+        
       </ul> 
 
       <ModeToggle />
@@ -22,9 +22,10 @@ export function Navbar() {
   }
 
   return(
-    <nav className="flex justify-between">
+    <nav className="flex justify-between mb-5">
       <ul className="flex gap-5">
-        {user && <li className=""><Link href="/">Home</Link></li>}
+        {!user && <li className=""><Link href="/">Home</Link></li>}
+        {user && <li className=""><Link href="/dashboard">Dashboard</Link></li>}
         {user && <li className=""><Link href="/account">Account</Link></li>}
         {!user && <li><Link href="/login">Login</Link></li>}
         {!user && <li><Link href="/login/signup">Sign Up</Link></li>}

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
+
   return (
     <div className="">
       <main className="">
@@ -27,7 +28,7 @@ export default function Home() {
           </div>
         </div>
       
-        <section>
+        {/* <section>
           <h3>Upcoming Events</h3>
           <div className="w-full h-30 bg-blue-200"></div>
         </section>
@@ -35,7 +36,7 @@ export default function Home() {
         <section>
           <h3>Popular CCAs</h3>
           <div className="w-full h-30 bg-blue-200"></div>
-        </section>
+        </section> */}
 
       </main>
 

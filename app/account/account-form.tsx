@@ -3,7 +3,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { type User } from '@supabase/supabase-js'
 import { logout } from '../logout/actions'
-import { useRouter } from 'next/router'
+
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 
 // ...
 export default function AccountForm({ user }: { user: User | null }) {
@@ -39,10 +42,9 @@ export default function AccountForm({ user }: { user: User | null }) {
   // Performs after page renders =======================================
   useEffect(() => {
     getProfile()
-
   }, [user, getProfile])
   
-  // Update Profile Function (Ignored for now) ===========================
+  // Update Profile Function 
   async function updateProfile({
     first_name
   }: {
@@ -66,36 +68,34 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   //  Page Tsx Content ===================================================
   return (
-    <div className="form-widget">
-      {/* ... */}
+    <div className="flex flex-col gap-3">
       <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={user?.email} disabled />
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="text" value={user?.email} disabled />
       </div>
+
       <div>
-        <label htmlFor="firstName">First Name</label>
-        <input
+        <Label htmlFor="firstName">First Name</Label>
+        <Input
           id="firstName"
           type="text"
           value={first_name || ''}
           onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
-      
-      <div>
-        <button
-          className="button primary block"
+    
+      <div className='flex gap-3'>
+        <Button
           onClick={() => updateProfile({ first_name })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div> 
-      <div>
-        <button className="button block" onClick={() => logout()}>
+        </Button>
+      
+        <Button variant="secondary" className='hover:cursor-pointer' onClick={() => logout()}>
           Sign out
-        </button>
-      </div>
+        </Button>
+      </div> 
     </div>
   )
 }

@@ -1,53 +1,69 @@
-import { AppSidebar } from "@/components/app-sidebar"
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { createClient } from "@/utils/supabase/server"
+import Link from "next/link";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge"
+import { redirect } from 'next/navigation'
 
-export default function Page() {
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+export default async function Dashboard() {
+  const supabase = await createClient();
+
+  // Check if user authenticated
+  const {data: { user }, error} = await supabase.auth.getUser()
+  // Redirect if unauthenticated
+  if (error || !user) {
+    redirect('/login')
+  }
+
+
+  const { data: cca_data } = await supabase
+    .from('cca_data')
+    .select('id, name, website_url, logo_url, branch, ig_url')
+    .range(0, 20);
+
+  if(!cca_data) {
+    return <p>No CCA Data :/</p>
+  }
+
+  return(
+    <>
+      <h1 className="font-bold text-3xl mb-4">All CCAs</h1>
+
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
+        {cca_data.map((cca) => 
+          <Link href={cca.website_url} key={cca.id} target="_blank">
+            <Card>
+              <CardHeader>
+                <CardTitle>{cca.name}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {cca.logo_url && <Image src={cca.logo_url} alt="cca Logo" width={100} height={100}/>}
+              </CardContent>
+              <CardFooter>
+                <Badge asChild>
+                  <Link href="#">{cca.branch}</Link>
+                </Badge>
+
+                {cca.ig_url && 
+                <Badge asChild variant="outline">
+                  <Link href={cca.ig_url} target="_blank">
+                    insta
+                  </Link>
+                </Badge>
+                }
+              </CardFooter>
+            </Card>
+          </Link>
+        )}
+      </div>
+    </>
   )
 }
