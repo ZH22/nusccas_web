@@ -46,14 +46,11 @@ export function SignupForm({
 
   // Convert to formData object to allow for signup action to work
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     const formData = new FormData();
     Object.entries(values).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    console.log(formData);
-    console.log([...formData.entries()]);
     onSignup(formData);
   }
 
