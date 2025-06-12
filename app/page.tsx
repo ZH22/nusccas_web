@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DynamicHeroTitle from "@/components/landingPageComponents/DynamicHeroTitle"
 import VerificationToast from "./login/signup/verificationSent/verificationToast";
+import { Suspense } from "react";
 
 export default function Home() {
 
@@ -53,7 +54,10 @@ export default function Home() {
         </Link>
       </footer>
 
-      <VerificationToast />
+
+      <Suspense>
+        <VerificationToast />
+      </Suspense>
     </div>
   );
 }
