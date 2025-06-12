@@ -8,6 +8,7 @@ import nusync_logo from "../public/NuSync_logo.png"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DynamicHeroTitle from "@/components/landingPageComponents/DynamicHeroTitle"
+import VerificationToast from "./login/signup/verificationSent/verificationToast";
 
 export default function Home() {
 
@@ -51,6 +52,8 @@ export default function Home() {
           <Image src={ nusync_logo } alt="Nusync Logo" className="w-30 mt-2"/>
         </Link>
       </footer>
+
+      <VerificationToast />
     </div>
   );
 }
