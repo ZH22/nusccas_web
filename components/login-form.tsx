@@ -1,5 +1,6 @@
+"use client"
+
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -7,6 +8,7 @@ import Link from "next/link"
 
 import Image from "next/image"
 import loginPlaceholer from "../public/login_placeholder.png"
+import LoginButton from "./login-button"
 
 interface LoginFormProps extends React.ComponentProps<"div"> {
   onLogin: (formData: FormData) => Promise<void>;
@@ -17,11 +19,15 @@ export function LoginForm({
   onLogin,
   ...props
 }: LoginFormProps) {
+  
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          
+          {/* Login Form */}
+          <form action={onLogin} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -51,9 +57,7 @@ export function LoginForm({
                 </div>
                 <Input name="password" id="password" type="password" required />
               </div>
-              <Button formAction={ onLogin } type="submit" className="w-full">
-                Login
-              </Button>
+              <LoginButton /> 
 
               {/* <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">

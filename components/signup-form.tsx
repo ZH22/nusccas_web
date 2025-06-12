@@ -1,7 +1,6 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -15,6 +14,8 @@ import { Control, FieldPath, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
+import { LoadingButton } from "./ui/loading-button";
+import { useState } from "react";
 
 // Zod Schema for Form Validation (Matches via 'name' property)
 const formSchema = z.object({
@@ -30,6 +31,8 @@ const formSchema = z.object({
 interface SignupFormProps extends React.ComponentProps<"div"> {
   onSignup: (formData: FormData) => Promise<void>;
 }
+
+
 export function SignupForm({
   className,
   onSignup,
@@ -46,14 +49,21 @@ export function SignupForm({
     },
   })
 
+  // Loading State
+  const [loading, setLoading] = useState(false)
 
   // Convert to formData object to allow for signup action to work
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    
+    // Prevent repeated submissions
+    if (loading) return;
+
     const formData = new FormData();
     Object.entries(values).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
+    setLoading(true);
     onSignup(formData);
   }
 
@@ -98,7 +108,7 @@ export function SignupForm({
 
               />
 
-              <Button type='submit'>Sign Up</Button>
+              <LoadingButton type='submit' variant="outline" loading={loading} disabled={loading} className="hover:cursor-pointer">Sign Up</LoadingButton>
             </form>
           </Form>
           <p className="mt-2">Already have an account? <Link href="/login">Login</Link></p>
