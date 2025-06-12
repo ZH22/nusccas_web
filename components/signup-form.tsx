@@ -19,8 +19,11 @@ import { Input } from "./ui/input";
 // Zod Schema for Form Validation (Matches via 'name' property)
 const formSchema = z.object({
     email: z.string().email(),
-    username: z.string().min(3).max(50),
-    password: z.string().min(8)
+    password: z.string().min(8),
+    confirmPassword: z.string().min(8)
+}).refine((data) => data.password === data.confirmPassword, { //Checks if confirm Password field equal
+  message: "Passwords Not Equal",
+  path: ['confirmPassword'],
 });
 
 // TSX Component
@@ -38,8 +41,8 @@ export function SignupForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      username: "",
       password: "",
+      confirmPassword: ""
     },
   })
 
@@ -78,18 +81,18 @@ export function SignupForm({
               />
 
               <SignupFormField 
-                name="username"
-                label="Username"
-                placeholder="username"
-                description="At least 3 characters."
-                formControl={form.control}
-              />
-
-              <SignupFormField 
                 name="password"
                 label="Password"
                 placeholder="password"
-                description="At least 8 characters."
+                inputType="password"
+                formControl={form.control}
+
+              />
+
+              <SignupFormField 
+                name="confirmPassword"
+                label="Confirm Password"
+                placeholder="confirm password"
                 inputType="password"
                 formControl={form.control}
 
