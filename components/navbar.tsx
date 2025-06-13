@@ -29,6 +29,8 @@ export function Navbar() {
         {user && <li className=""><Link href="/account">Account</Link></li>}
         {!user && <li><Link href="/login">Login</Link></li>}
         {!user && <li><Link href="/login/signup">Sign Up</Link></li>}
+
+        <li><Link href="/browse">Browse</Link></li>
       </ul> 
 
       <ModeToggle />
