@@ -4,6 +4,7 @@ import Stepper, { Step } from '@/components/reactBitsComponents/Stepper/Stepper'
 import { useState } from 'react';
 import { Combobox } from '@/components/combo-box';
 import { Input } from '@/components/ui/input';
+import Image from 'next/image';
 
 export default function OnboardStepper() {
 
@@ -39,11 +40,11 @@ export default function OnboardStepper() {
       <Step>
         <h2 className='text-4xl font-bold'>Welcome to NusCCAs! </h2>
         <br />
-        <p>Let's Find out more about you</p>
+        <p>{"Let's"} Find out more about you</p>
       </Step>
 
       <Step>
-        <h2 className='text-2xl font-bold'>What's your major?</h2>
+        <h2 className='text-2xl font-bold'>{"What's"} your major?</h2>
         <br />
         {/* May need to lift state up to parent to allow for persistence */}
         <Combobox items={frameworks}/>
@@ -51,7 +52,7 @@ export default function OnboardStepper() {
 
       <Step>
         <h2>Step 2</h2>
-        <img style={{ height: '100px', width: '100%', objectFit: 'cover', objectPosition: 'center -70px', borderRadius: '15px', marginTop: '1em' }} src="https://www.purrfectcatgifts.co.uk/cdn/shop/collections/Funny_Cat_Cards_640x640.png?v=1663150894" />
+        <Image alt="cat" style={{ height: '100px', width: '100%', objectFit: 'cover', objectPosition: 'center -70px', borderRadius: '15px', marginTop: '1em' }} src="https://www.purrfectcatgifts.co.uk/cdn/shop/collections/Funny_Cat_Cards_640x640.png?v=1663150894" />
         <p>Meow</p>
       </Step>
 
