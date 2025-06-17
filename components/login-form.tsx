@@ -10,12 +10,11 @@ import Image from "next/image"
 import loginPlaceholer from "../public/login_placeholder.png"
 import LoginButton from "./login-button"
 import { useActionState, useEffect } from "react"
-import { AuthApiError } from "@supabase/supabase-js"
 
 import { Toaster, toast } from 'sonner'
 
 interface LoginFormProps extends React.ComponentProps<"div"> {
-  onLogin: (previousState: unknown, formData: FormData) => Promise<AuthApiError>;
+  onLogin: (previousState: unknown, formData: FormData) => Promise<{message: string}>;
 }
 
 export function LoginForm({

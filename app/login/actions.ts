@@ -20,7 +20,7 @@ export async function login(previousState: unknown, formData: FormData) {
 
   if (isAuthApiError(error)) {
     // Handle the Authentication Api Error on client
-    return error
+    return { message: error.message }
   } else if (error) {
     redirect('/error')
   }

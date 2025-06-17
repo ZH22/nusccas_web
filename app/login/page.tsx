@@ -17,7 +17,6 @@ export default function LoginPage() {
           </AlertDescription>
         </Alert>
 
-
         <LoginForm onLogin={login}/>
       </div>
     </div>
