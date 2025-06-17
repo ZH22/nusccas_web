@@ -9,9 +9,13 @@ import Link from "next/link"
 import Image from "next/image"
 import loginPlaceholer from "../public/login_placeholder.png"
 import LoginButton from "./login-button"
+import { useActionState, useEffect } from "react"
+import { AuthApiError } from "@supabase/supabase-js"
+
+import { Toaster, toast } from 'sonner'
 
 interface LoginFormProps extends React.ComponentProps<"div"> {
-  onLogin: (formData: FormData) => Promise<void>;
+  onLogin: (previousState: unknown, formData: FormData) => Promise<AuthApiError>;
 }
 
 export function LoginForm({
@@ -20,6 +24,14 @@ export function LoginForm({
   ...props
 }: LoginFormProps) {
   
+  const [data, action] = useActionState(onLogin, undefined)
+  
+  useEffect(() => {
+    if (data?.message){
+      toast.error(data?.message)
+    }
+  }, [data])
+  
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -27,7 +39,7 @@ export function LoginForm({
         <CardContent className="grid p-0 md:grid-cols-2">
           
           {/* Login Form */}
-          <form action={onLogin} className="p-6 md:p-8">
+          <form action={action} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -115,6 +127,11 @@ export function LoginForm({
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </div>
+
+      
+      {/* Sonner Toaster */}
+      <Toaster richColors expand={true} position="top-center"/>
+
     </div>
   )
 }

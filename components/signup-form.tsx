@@ -15,7 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { LoadingButton } from "./ui/loading-button";
-import { useState } from "react";
+import { AuthApiError, isAuthApiError } from "@supabase/supabase-js";
+import { useState, useEffect } from "react"
+import { Toaster, toast } from 'sonner'
 
 // Zod Schema for Form Validation (Matches via 'name' property)
 const formSchema = z.object({
@@ -29,7 +31,7 @@ const formSchema = z.object({
 
 // TSX Component
 interface SignupFormProps extends React.ComponentProps<"div"> {
-  onSignup: (formData: FormData) => Promise<void>;
+  onSignup: (formData: FormData) => Promise<AuthApiError>;
 }
 
 
@@ -51,9 +53,21 @@ export function SignupForm({
 
   // Loading State
   const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<AuthApiError | undefined>(undefined)
+
+  // For Toast Error showing
+  useEffect(() => {
+    if (isAuthApiError(data)) {
+      if (data?.message){
+        toast.info(data?.message)
+      }
+    }
+
+  }, [data])
+  
 
   // Convert to formData object to allow for signup action to work
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     
     // Prevent repeated submissions
     if (loading) return;
@@ -64,7 +78,8 @@ export function SignupForm({
     });
 
     setLoading(true);
-    onSignup(formData);
+    const result = await onSignup(formData)
+    setData(result)
   }
 
 
@@ -114,6 +129,8 @@ export function SignupForm({
           <p className="mt-2">Already have an account? <Link href="/login">Login</Link></p>
         </CardContent>
       </Card>
+      
+      <Toaster richColors expand={true} position="top-center"/>
     </div>
   )
 };

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
+import { isAuthApiError } from '@supabase/supabase-js'
 
 export async function signup(formData: FormData) {
   const supabase = await createClient()
@@ -25,9 +26,15 @@ export async function signup(formData: FormData) {
 
   const { error } = await supabase.auth.signUp(data)
 
-  if (error) {
+  
+  if (isAuthApiError(error)) {
+    // Handle the Authentication Api Error on client
+    return error
+  } else if (error) {
     redirect('/error')
   }
+
+  console.log(error)
 
   revalidatePath('/', 'layout')
   redirect('/login/signup/verificationSent')
