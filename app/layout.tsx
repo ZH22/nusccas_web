@@ -19,8 +19,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "nusCCAs",
-  description: "Powering a More Holistic Student Life",
+  openGraph: {
+    title: {
+      template: '%s | NusCCAs',
+      default: "NusCCAs",
+    },
+    description: "Powering a More Holistic Student Life",
+    siteName: 'NusCCAs',
+    images: [
+      {
+        url: 'https://oxttowgsypcnbeobqril.supabase.co/storage/v1/object/public/public-static-content//siteImage.png',
+        width: 903,
+        height: 453
+      }
+    ],
+    type: 'website'
+  },
+  generator: 'Next.js',
+  keywords: ['NUS', 'NuSync', 'CCA', 'Recommender', 'Hackathons', 'Student Life', 'Event', 'Events'],
+ 
 };
 
 export default function RootLayout({
