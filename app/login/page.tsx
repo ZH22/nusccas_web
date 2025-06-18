@@ -2,6 +2,7 @@ import { LoginForm } from "@/components/login-form"
 import { login } from './actions'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Lightbulb } from "lucide-react"
+import Footer from "@/components/landingPageComponents/Footer"
 
 export default function LoginPage() {
   return (
@@ -19,6 +20,8 @@ export default function LoginPage() {
 
         <LoginForm onLogin={login}/>
       </div>
+
+      <Footer />
     </div>
   )
 }

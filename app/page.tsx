@@ -3,11 +3,11 @@
 import Image from "next/image";
 import explore_lightSVG from "../public/explore_light.svg"
 import explore_darkSVG from "../public/explore_dark.svg"
-import nusync_logo from "../public/NuSync_logo.png"
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DynamicHeroTitle from "@/components/landingPageComponents/DynamicHeroTitle"
+import Footer from "@/components/landingPageComponents/Footer";
 import VerificationToast from "./login/signup/verificationSent/verificationToast";
 import { Suspense } from "react";
 
@@ -30,7 +30,7 @@ export default function Home() {
           </div>
 
           <div className="z-10">
-            <Image className="hidden dark:block w-full"priority src={ explore_darkSVG } alt="Exploration Illustration" />
+            <Image className="hidden dark:block w-full" priority src={ explore_darkSVG } alt="Exploration Illustration" />
             <Image className="block dark:hidden w-full" priority src={ explore_lightSVG } alt="Exploration Illustration" />
           </div>
         </div>
@@ -47,13 +47,7 @@ export default function Home() {
 
       </main>
 
-      <footer className="mt-10">
-        <p className="font-extralight text-sm underline dark:text-gray-300">Sourced from:</p>
-        <Link href="https://nus.campuslabs.com/engage/" target="__blank">
-          <Image src={ nusync_logo } alt="Nusync Logo" className="w-30 mt-2"/>
-        </Link>
-      </footer>
-
+      <Footer />
 
       <Suspense>
         <VerificationToast />

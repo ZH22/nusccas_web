@@ -7,6 +7,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from '@/contexts/auth-context';
 import { Navbar } from "@/components/navbar";
+import Container from "@/components/container";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,15 +49,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="3f58a922-49d7-4329-9f22-8ed548d5dcb8"></script>
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${geistSans.className}`}
       >
         <ThemeProvider>
           <AuthProvider>
-            <div className="m-auto w-4/5 my-8">
               <Navbar />
-              {children}
-            </div>
+              <Container>
+                {children}
+              </Container>
           </AuthProvider>
         </ThemeProvider>
 
