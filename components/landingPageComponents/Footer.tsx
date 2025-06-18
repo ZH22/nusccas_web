@@ -1,10 +1,78 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
 import nusync_logo from "../../public/NuSync_logo.png"
 import siteLogo from "../../public/logo.png"
 import { BugIcon, RocketIcon } from "lucide-react"
+import { Button } from "../ui/button"
+import React, { useState } from "react"
+import { Textarea } from "../ui/textarea"
+import { Toaster, toast } from "sonner"
 
 export default function Footer() {
+  
+  const [bugMessage, setBugMessage] = useState<undefined|string>(undefined)
+  
+  async function sendTeleBugMessage(message: string) {
+    // POST message to local api Endpoint 
+    // Sends message to Both Developer about bug 
+
+    // Message Dev 1
+    const response_1 = await fetch(`/api/telegram/alert-dev-1`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: message
+      })
+    })
+    
+    // Message Dev 2
+    const response_2 = await fetch(`/api/telegram/alert-dev-2`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: message
+      })
+    })
+
+    // Count number of devs that got notified successfully
+    let count = 0
+    if (response_1.ok) {count++}
+    if (response_2.ok) {count++}
+    return count
+  }
+
+  const handleBugInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>{
+    setBugMessage(event.target.value);
+  }
+  
+  async function handleBugSubmit() {
+    // Take text from text box and send tele message
+
+    if (bugMessage && bugMessage != ''){
+      // Send to ZH
+      const successNotifiedCount = await sendTeleBugMessage(bugMessage)
+
+      // Show Success Toast
+      if(successNotifiedCount == 2) {
+        toast.success("Devs have been Notified! Thank you for your feedback!")
+      } else if (successNotifiedCount == 1) {
+        toast.info("At least one Dev got your notification! Thanks!!!")
+      } else {
+        toast.error("Bug not sent through. Sorry for the Inconvenience (Guess this is a bug too :p)")
+      }
+    }
+
+    // Clear Textbox
+    setBugMessage('')
+
+  }
+  
   return(
     <footer className="mt-10">
       
@@ -145,19 +213,24 @@ export default function Footer() {
                 Noticed a bug? Write us down below
               </p>
 
-              <div>CHANGE WITH FORM COMPONENT</div>
+              <div className="mt-2">
+                <Textarea placeholder="Describe the bug" value={bugMessage} onChange={handleBugInputChange}/>
+                <Button onClick={handleBugSubmit} variant="secondary" className="cursor-pointer mt-2" >Submit</Button>
+              </div>
             </div>
           </div>
         </div>
 
         <div
-          className="mt-16 border-t border-gray-100 pt-6 sm:flex sm:items-center sm:justify-between dark:border-gray-800"
+          className="mt-8 border-t border-gray-100 pt-6 sm:flex sm:items-center sm:justify-between dark:border-gray-800"
         >
           <p className="text-center text-sm text-gray-500 sm:text-left dark:text-gray-400">
             Copyright &copy; 2025. All rights reserved.
           </p>
         </div>
       </div>
+
+      <Toaster richColors />
     </footer>
 
   )

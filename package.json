@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "NODE_OPTIONS=--no-network-family-autoselection next dev --turbopack",
+    "build": "NODE_OPTIONS=--no-network-family-autoselection next build",
+    "start": "NODE_OPTIONS=--no-network-family-autoselection next start",
+    "lint": "NODE_OPTIONS=--no-network-family-autoselection next lint",
     "cypress:open": "cypress open"
   },
   "dependencies": {

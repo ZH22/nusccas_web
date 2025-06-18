@@ -91,7 +91,7 @@ export function Navbar() {
             </li>}              
 
             {user && <li className="">
-              <Link href="/account">
+              <Link href="/browse">
                 <Button className="w-full h-full cursor-pointer"><FolderTreeIcon />Browse</Button>
               </Link>
             </li>} 
