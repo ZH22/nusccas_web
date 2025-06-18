@@ -53,10 +53,13 @@ export default function Footer() {
   
   async function handleBugSubmit() {
     // Take text from text box and send tele message
+    const messageToSend = bugMessage
+    // Clear Textbox
+    setBugMessage('')
 
-    if (bugMessage && bugMessage != ''){
+    if (messageToSend && messageToSend != ''){
       // Send to ZH
-      const successNotifiedCount = await sendTeleBugMessage(bugMessage)
+      const successNotifiedCount = await sendTeleBugMessage("BUG🐞🪳 - " + messageToSend)
 
       // Show Success Toast
       if(successNotifiedCount == 2) {
@@ -68,8 +71,6 @@ export default function Footer() {
       }
     }
 
-    // Clear Textbox
-    setBugMessage('')
 
   }
   
@@ -172,15 +173,6 @@ export default function Footer() {
               </li>
 
               <li>
-                <a
-                  className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                  href="#"
-                >
-                  Support
-                </a>
-              </li>
-
-              <li>
                 <Link
                   className="group flex justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
                   href="https://cloud.umami.is/share/IdW7f5cV8MZkK1hi/nusccas-web.vercel.app" target="_blank"
@@ -210,7 +202,7 @@ export default function Footer() {
               <p
                 className="text-center leading-relaxed text-gray-500 ltr:sm:text-left rtl:sm:text-right dark:text-gray-400"
               >
-                Noticed a bug? Write us down below
+                Noticed a bug? Tell us down below
               </p>
 
               <div className="mt-2">

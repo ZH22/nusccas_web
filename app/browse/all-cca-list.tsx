@@ -1,16 +1,23 @@
 "use client"
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
 
 import { createClient } from "@/utils/supabase/client"
 import { useState, useEffect } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
+import Image from "next/image"
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import Link from "next/link"
+import { InstagramIcon, SchoolIcon } from "lucide-react"
 
 // Typescript Interface for incoming data
 type CCA = {
@@ -54,18 +61,34 @@ export default function AllCCAList() {
   return (
     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
       {ccas?.map((cca) => 
-        <Popover key={cca.id}>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="truncate p-5 cursor-pointer">
-              <Avatar>
-                <AvatarImage src={cca.logo_url} />
-                <AvatarFallback>{cca.name.slice(0,2).toUpperCase() }</AvatarFallback>
-              </Avatar>
-              {cca.name}
-            </Button>
-          </PopoverTrigger> 
-          <PopoverContent>{cca.description}</PopoverContent>
-        </Popover> 
+        <Dialog key={cca.id}>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="p-5 py-7 cursor-pointer">
+              <div className="flex gap-3 max-w-50 truncate justify-start text-lg text-gray-400">
+                <Avatar>
+                  <AvatarImage src={cca.logo_url} className="z-0"/>
+                  <AvatarFallback>{cca.name.slice(0,2).toUpperCase() }</AvatarFallback>
+                </Avatar>
+                {cca.name}
+              </div>
+           </Button>
+          </DialogTrigger> 
+
+          <DialogContent className="dark:bg-gray-700">
+            <DialogHeader>
+              <DialogTitle>{cca.name}</DialogTitle>
+            </DialogHeader>
+            <DialogDescription>CCA Info</DialogDescription>
+            <div className="flex flex-col gap-5 items-center">
+              <Image alt={cca.name} src={cca.logo_url} width={100} height={100} className="rounded-full"/>
+              <div className="border border-gray-300 p-3 rounded-2xl">{cca.branch}</div>
+              <div className="flex gap-5">
+                {cca.ig_url && <Link href={cca.ig_url} target="_blank"><InstagramIcon /></Link>}
+                {cca.website_url && <Link href={cca.website_url} target="_blank"><SchoolIcon /></Link>}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog> 
       )}
       
     </div>
