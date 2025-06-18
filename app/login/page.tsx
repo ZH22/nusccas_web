@@ -6,11 +6,11 @@ import Footer from "@/components/landingPageComponents/Footer"
 
 export default function LoginPage() {
   return (
-    <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
 
         {/* Temporary Alert for Milestones */}
-        <Alert variant="default" className="text-amber-300">
+        <Alert variant="default" className="text-amber-600 dark:text-amber-300 bg-muted mb-3">
           <Lightbulb />
           <AlertTitle className="text-xl">Heads Up!</AlertTitle>
           <AlertDescription className="text-l">

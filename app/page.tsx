@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className="">
-      <main className="z-10">
+      <main className="z-10 mx-5 md:mx-0">
 
         <div className="w-full my-10 flex flex-col md:flex-row-reverse md:items-center md:justify-center gap-10">
 
