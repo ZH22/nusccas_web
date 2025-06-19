@@ -26,17 +26,24 @@ export interface Item {
 
 type ItemListProp = {
   items: Item[];
-  value: string;
-  onValueChange: (value: string) => void;
+  value: string[];
+  onValueChange: (value: string[]) => void;
 };
 
-export const Combobox: React.FC<ItemListProp> = ({
+export const MultiSelectCombobox: React.FC<ItemListProp> = ({
   items,
-  value,
+  value = [],
   onValueChange,
 }) => {
   const [open, setOpen] = React.useState(false);
-  //const [value, setValue] = React.useState("");
+  //const [value, setValue] = React.useState<string[]>([]);
+
+  const handleSetValue = (val: string) => {
+    const newValue = value.includes(val)
+      ? value.filter((item) => item !== val)
+      : [...value, val];
+    onValueChange(newValue);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -45,11 +52,20 @@ export const Combobox: React.FC<ItemListProp> = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[300px] justify-between"
         >
-          {value
-            ? items.find((item: Item) => item.value === value)?.label
-            : "Select..."}
+          <div className="flex gap-2 justify-start">
+            {value?.length
+              ? value.map((val, i) => (
+                  <div
+                    key={i}
+                    className="px-2 py-1 rounded-xl border bg-slate-200 text-xs font-medium"
+                  >
+                    {items.find((item: Item) => item.value === val)?.label}
+                  </div>
+                ))
+              : "Select..."}
+          </div>
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -64,14 +80,16 @@ export const Combobox: React.FC<ItemListProp> = ({
                   key={item.value}
                   value={item.value}
                   onSelect={(currentValue) => {
-                    onValueChange(currentValue === value ? "" : currentValue);
-                    setOpen(false);
+                    //setValue(currentValue === value ? "" : currentValue);
+                    handleSetValue(currentValue);
+                    //setOpen(false);
                   }}
                 >
                   <CheckIcon
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
+                      //value === item.value ? "opacity-100" : "opacity-0"
+                      value.includes(item.value) ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {item.label}
