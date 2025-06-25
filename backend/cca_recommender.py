@@ -34,7 +34,9 @@ class ModelAPI(ls.LitAPI):
 
         for item in response.data:
             for val in item.values():
-                if isinstance(val, list):
+                if not val or (val in ["Others", "Secret", "None"]):
+                    continue
+                elif isinstance(val, list):
                     user_tags.extend(val)
                 elif isinstance(val, str):
                     user_tags.append(val)

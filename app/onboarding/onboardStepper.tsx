@@ -64,7 +64,6 @@ export default function OnboardStepper({ user }: { user: User | null }) {
     getProfile();
   }, [user, getProfile]);
 
-  // Update Profile Function
   async function updateProfileAndRecommendCcas({
     firstName,
     race,
@@ -82,6 +81,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
     ccas: string[];
     interests: string[];
   }) {
+    // Update profile in Supabase
     try {
       const { error } = await supabase
         .from("profiles")
@@ -104,16 +104,10 @@ export default function OnboardStepper({ user }: { user: User | null }) {
     }
 
     // API call to run CCA recommender AI model on user & CCA data in Lightning AI Studio
-    const LIT_SERVER_API_KEY = process.env.NEXT_PUBLIC_LIT_SERVER_API_KEY;
-    if (!LIT_SERVER_API_KEY) {
-      throw new Error("LIT_SERVER_API_KEY is not defined in .env.local");
-    }
-    const url =
-      "https://8000-01jyc5f4xnnk2wrzcmybg4vbgr.cloudspaces.litng.ai/predict";
+    const url = "/api/lightning_ai/run_cca_recommender";
     const options = {
       method: "POST",
       headers: {
-        "X-API-Key": LIT_SERVER_API_KEY,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ user_id: user?.id as string }),
