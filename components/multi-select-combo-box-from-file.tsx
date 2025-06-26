@@ -34,7 +34,7 @@ export default function MultiSelectComboboxFromFile({
     };
 
     fetchItems();
-  }, []);
+  }, [filePath]);
 
   return (
     <MultiSelectCombobox

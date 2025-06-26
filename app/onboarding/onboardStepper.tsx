@@ -14,7 +14,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -45,13 +44,13 @@ export default function OnboardStepper({ user }: { user: User | null }) {
         throw error;
       }
       if (data) {
-        data["first_name"] && setFirstName(data["first_name"]); // "&&" used so that if data is null, placeholder shows
-        data["race"] && setRace(data["race"]);
-        data["religion"] && setReligion(data["religion"]);
-        data["majors"] && setMajors(data["majors"]);
-        data["minors"] && setMinors(data["minors"]);
-        data["ccas"] && setCcas(data["ccas"]);
-        data["interests"] && setInterests(data["interests"]);
+        if (data["first_name"]) setFirstName(data["first_name"]); // "if" used so that if data is null, placeholder shows
+        if (data["race"]) setRace(data["race"]);
+        if (data["religion"]) setReligion(data["religion"]);
+        if (data["majors"]) setMajors(data["majors"]);
+        if (data["minors"]) setMinors(data["minors"]);
+        if (data["ccas"]) setCcas(data["ccas"]);
+        if (data["interests"]) setInterests(data["interests"]);
       }
     } catch (error) {
       console.log(error);
@@ -147,11 +146,11 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       <Step>
         <h2 className="text-4xl font-bold">Welcome to nusCCAs!</h2>
         <br />
-        <p>Let's find out more about you</p>
+        <p>{"Let's"} find out more about you</p>
       </Step>
 
       <Step>
-        <h2 className="text-2xl font-bold">What's your first name?</h2>
+        <h2 className="text-2xl font-bold">{"What's"} your first name?</h2>
         <br />
         <Input
           value={firstName == "" ? undefined : firstName}
@@ -161,7 +160,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       </Step>
 
       <Step>
-        <h2 className="text-2xl font-bold">What's your race?</h2>
+        <h2 className="text-2xl font-bold">{"What's"} your race?</h2>
         <br />
         <Select value={race} onValueChange={setRace}>
           <SelectTrigger className="w-[180px]">
@@ -180,7 +179,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       </Step>
 
       <Step>
-        <h2 className="text-2xl font-bold">What's your religion?</h2>
+        <h2 className="text-2xl font-bold">{"What's"} your religion?</h2>
         <br />
         <Select value={religion} onValueChange={setReligion}>
           <SelectTrigger className="w-[180px]">
@@ -203,7 +202,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       </Step>
 
       <Step>
-        <h2 className="text-2xl font-bold">What's your major?</h2>
+        <h2 className="text-2xl font-bold">{"What's"} your major?</h2>
         <br />
         <h2 className="text-sm text-gray-500">You may select more than one.</h2>
         <MultiSelectComboboxFromFile
@@ -214,7 +213,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       </Step>
 
       <Step>
-        <h2 className="text-2xl font-bold">What's your minor (if any)?</h2>
+        <h2 className="text-2xl font-bold">{"What's"} your minor (if any)?</h2>
         <br />
         <h2 className="text-sm text-gray-500">You may select more than one.</h2>
         <MultiSelectComboboxFromFile

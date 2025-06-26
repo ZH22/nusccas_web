@@ -6,9 +6,15 @@ import type { Item } from "@/components/combo-box";
 
 type Props = {
   filePath: string;
+  value: string;
+  onValueChange: (value: string) => void;
 };
 
-export default function ComboboxFromFile({ filePath }: Props) {
+export default function ComboboxFromFile({
+  filePath,
+  value,
+  onValueChange,
+}: Props) {
   const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function ComboboxFromFile({ filePath }: Props) {
     };
 
     fetchItems();
-  }, []);
+  }, [filePath]);
 
-  return <Combobox items={items} />;
+  return <Combobox items={items} value={value} onValueChange={onValueChange} />;
 }
