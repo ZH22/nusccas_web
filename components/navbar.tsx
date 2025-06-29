@@ -33,7 +33,7 @@ export function Navbar() {
   }
 
   return(
-    <nav className="md:w-4/5 md:my-8 md:mx-auto flex justify-between py-5 mx-5 sticky top-0 bg-gray-950 z-1500">
+    <nav className="md:w-4/5 md:my-8 md:mx-auto flex justify-between py-5 mx-5 sticky top-0 z-1500">
       <ul className="hidden gap-5 md:flex">
         {!user && <li className=""><Link href="/">Home</Link></li>}
         {user && <li className=""><Link href="/dashboard">Dashboard</Link></li>}

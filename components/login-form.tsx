@@ -38,7 +38,7 @@ export function LoginForm({
         <CardContent className="grid p-0 md:grid-cols-2">
           
           {/* Login Form */}
-          <form action={action} className="p-6 md:p-8">
+          <form data-cy="loginForm" action={action} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -49,6 +49,7 @@ export function LoginForm({
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  data-cy="loginEmailInput"
                   name="email"
                   id="email"
                   type="email"
@@ -66,7 +67,11 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input name="password" id="password" type="password" required />
+                <Input 
+                  data-cy="loginPasswordInput"
+                  name="password" 
+                  id="password" 
+                  type="password" required />
               </div>
               <LoginButton /> 
 

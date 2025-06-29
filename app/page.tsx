@@ -25,7 +25,7 @@ export default function Home() {
 
             <h3 className="font-light">Personalized recommendations for CCAs and events based on your interests</h3>
             <Button asChild>
-              <Link href="/dashboard">View Dashboard</Link>
+              <Link data-cy="landingDashboardbutton" href="/dashboard">View Dashboard</Link>
             </Button>
           </div>
 
