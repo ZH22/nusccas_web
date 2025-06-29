@@ -1,15 +1,11 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { createClient } from "@/utils/supabase/server"
-import Link from "next/link";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge"
 import { redirect } from 'next/navigation'
+
+import { Skeleton } from "@/components/ui/skeleton"
+import { Loader2 } from "lucide-react";
+import RecoGrid from "./RecoGrid";
+
+
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -31,37 +27,64 @@ export default async function Dashboard() {
     return <p>No CCA Data :/</p>
   }
 
+  const { data } = await supabase
+    .from("profiles")
+    .select("recommendations, isOnboarded")
+    .eq("id", user?.id)
+    .single();
+
+  // Redirect if user not onbaorded
+  if (!data?.isOnboarded) {
+    redirect('/onboarding')
+  } 
+
+  
+  const PlaceholderCards = ({ className }: {className?:string}) => {
+    return (
+      <div className={className + ` flex flex-col space-y-3`}>
+        <Skeleton className="h-[125px] w-[250px] rounded-xl m-auto mb-3 dark:bg-slate-800 bg-slate-300" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px] m-auto mb-3 bg-slate-300 dark:bg-slate-800" />
+          <Skeleton className="h-4 w-[200px] m-auto mb-3 bg-slate-300 dark:bg-slate-800" />
+        </div>
+      </div>
+    )
+  }
+
+
   return(
     <>
-      <h1 className="font-bold text-3xl mb-4">All CCAs</h1>
+      { (data?.isOnboarded && !data.recommendations) && 
+        <div>
+          <h2 className="text-center text-5xl font-bold">Dashboard</h2>
+          <div className="relative py-5 max-w-4xl m-auto">
+            <div className="bg-gray-200 dark:bg-gray-700 p-5 rounded-2xl mb-10">
+              <h3 className="text-xl">Your Recommendations are pending! Come back and refresh in a few minutes</h3>
+              <Loader2 className="animate-spin"/>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <PlaceholderCards />
+              <PlaceholderCards />
+              <PlaceholderCards />
+              <PlaceholderCards className="hidden md:block"/>
+              <PlaceholderCards className="hidden md:block"/>
+              <PlaceholderCards className="hidden md:block"/>
+            </div>
+          </div>
+        </div>
+      }
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-        {cca_data.map((cca) => 
-          <Link href={cca.website_url} key={cca.id} target="_blank">
-            <Card>
-              <CardHeader>
-                <CardTitle>{cca.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {cca.logo_url && <Image src={cca.logo_url} alt="cca Logo" width={100} height={100}/>}
-              </CardContent>
-              <CardFooter>
-                <Badge asChild>
-                  <Link href="#">{cca.branch}</Link>
-                </Badge>
-
-                {cca.ig_url && 
-                <Badge asChild variant="outline">
-                  <Link href={cca.ig_url} target="_blank">
-                    insta
-                  </Link>
-                </Badge>
-                }
-              </CardFooter>
-            </Card>
-          </Link>
-        )}
-      </div>
+      { (data?.isOnboarded && data.recommendations) && 
+        <div>
+          <h2 className="text-center text-5xl font-bold">Dashboard</h2>
+          <div className="bg-gray-200 dark:bg-gray-700 p-5 rounded-2xl max-w-5xl m-auto mt-5">
+            <h3 className="text-2xl text-center">Your Recommended CCAs!</h3>
+          </div>
+          <div className="relative py-5 max-w-5xl m-auto">
+            <RecoGrid /> 
+          </div>
+        </div> 
+      }
     </>
   )
 }
