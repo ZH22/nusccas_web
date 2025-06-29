@@ -59,7 +59,7 @@ export const MultiSelectCombobox: React.FC<ItemListProp> = ({
               ? value.map((val, i) => (
                   <div
                     key={i}
-                    className="px-2 py-1 rounded-xl border bg-slate-200 text-xs font-medium"
+                    className="px-2 py-1 rounded-xl border bg-slate-200 text-xs font-medium dark:bg-slate-800"
                   >
                     {items.find((item: Item) => item.value === val)?.label}
                   </div>

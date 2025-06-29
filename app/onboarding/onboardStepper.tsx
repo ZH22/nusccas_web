@@ -20,6 +20,7 @@ import {
 import { DynamicInputs } from "@/components/dynamic-inputs";
 import { type User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
 export default function OnboardStepper({ user }: { user: User | null }) {
   const [firstName, setFirstName] = useState<string>("");
@@ -93,6 +94,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
           minors: minors,
           ccas: ccas,
           interests: interests,
+          isOnboarded: true // Set onboarded flag to true
         })
         .eq("id", user?.id as string);
       if (error) throw error;
@@ -112,14 +114,19 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       body: JSON.stringify({ user_id: user?.id as string }),
     };
 
-    try {
-      fetch(url, options); // no response expected
-      //const response = await fetch(url, options);
-      //const data = await response.json();
-      //console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+    // AI Recommender call (To enable on deployment) ==========================
+    // try {
+    //   fetch(url, options); // no response expected
+    //   //const response = await fetch(url, options);
+    //   //const data = await response.json();
+    //   //console.log(data);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
+    redirect("/dashboard")
+
+    // =================================================
   }
 
   return (
@@ -239,7 +246,9 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       <Step>
         <h2 className="text-2xl font-bold">Thank You!</h2>
         <br />
-        <p>Our AI model is working hard to find the perfect CCAs for you.</p>
+        <p>To confirm, please press 'Complete'</p>
+        <br></br>
+        <p>Our AI model will then update the perfect CCAs for you. Please allow some time</p>
       </Step>
 
       {/* onFinalStepCompleted => Callback fired after user finishes the final Step */}

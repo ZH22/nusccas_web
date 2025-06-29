@@ -27,7 +27,6 @@ export function Navbar() {
         {!user && <li className=""><Link href="/">Home</Link></li>}
         {user && <li className=""><Link href="/dashboard">Dashboard</Link></li>}
         {user && <li className=""><Link href="/account">Account</Link></li>}
-        {user && <li className=""><Link href="/onboarding">Onboarding</Link></li>}
         {!user && <li><Link href="/login">Login</Link></li>}
         {!user && <li><Link href="/login/signup">Sign Up</Link></li>}
       </ul> 
