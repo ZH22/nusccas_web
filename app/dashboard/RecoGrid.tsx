@@ -72,14 +72,14 @@ export default function RecoGrid() {
 
   if (!ccas) {
     return(
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
         { [...Array(10)].map((e, i) => <PlaceholderCards key={i} />) }
       </div>
     )
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 m-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-10 m-auto">
       {ccas?.map((cca) =>
         <RecoCard key={cca.id} title={cca.name} description={cca.description} imgSrc={cca.logo_url} ccaUrl={cca.website_url} topCCAs={topCcaNames}/>
       )}
