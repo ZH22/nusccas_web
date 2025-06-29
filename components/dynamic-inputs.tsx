@@ -8,11 +8,13 @@ import { Plus, Minus } from "lucide-react";
 export interface DynamicInputsProps {
   value?: string[];
   onValueChange?: (values: string[]) => void;
+  placeholder?: string
 }
 
 export function DynamicInputs({
   value = [],
   onValueChange,
+  placeholder
 }: DynamicInputsProps) {
   const [inputs, setInputs] = useState<{ id: string; value: string }[]>( // time used as the unique id
     value.map((value) => ({ id: Date.now().toString() + value, value })) // loads the saved previously written inputs
@@ -51,7 +53,7 @@ export function DynamicInputs({
             <Input
               value={input.value}
               onChange={(e) => handleInputChange(input.id, e.target.value)}
-              placeholder="CCA"
+              placeholder={placeholder}
             />
             <Button onClick={() => removeInput(input.id)}>
               <Minus />

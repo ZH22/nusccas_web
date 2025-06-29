@@ -115,14 +115,20 @@ export default function OnboardStepper({ user }: { user: User | null }) {
     };
 
     // AI Recommender call (To enable on deployment) ==========================
-    // try {
-    //   fetch(url, options); // no response expected
-    //   //const response = await fetch(url, options);
-    //   //const data = await response.json();
-    //   //console.log(data);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          recommendations: null // Remove previous reccomendation state
+        })
+        .eq("id", user?.id as string); 
+
+        if (error) {console.log(error)}
+
+      fetch(url, options); // no response expected
+    } catch (error) {
+      console.error(error);
+    }
 
     redirect("/dashboard")
 
@@ -234,19 +240,19 @@ export default function OnboardStepper({ user }: { user: User | null }) {
         <h2 className="text-2xl font-bold pb-2">
           What are your current and past CCAs?
         </h2>
-        <DynamicInputs value={ccas} onValueChange={setCcas} />
+        <DynamicInputs value={ccas} onValueChange={setCcas} placeholder="New CCA"/>
       </Step>
 
       <Step>
         <h2 className="text-2xl font-bold">What are your interests?</h2>
         <br />
-        <DynamicInputs value={interests} onValueChange={setInterests} />
+        <DynamicInputs value={interests} onValueChange={setInterests} placeholder="New Interest"/>
       </Step>
 
       <Step>
         <h2 className="text-2xl font-bold">Thank You!</h2>
         <br />
-        <p>To confirm, please press 'Complete'</p>
+        <p>To confirm, please press Complete</p>
         <br></br>
         <p>Our AI model will then update the perfect CCAs for you. Please allow some time</p>
       </Step>
