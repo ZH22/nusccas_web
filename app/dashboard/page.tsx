@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2 } from "lucide-react";
 import RecoGrid from "./RecoGrid";
+import Footer from "@/components/landingPageComponents/Footer";
 
 
 
@@ -85,6 +86,8 @@ export default async function Dashboard() {
           </div>
         </div> 
       }
+
+      <Footer />
     </>
   )
 }
