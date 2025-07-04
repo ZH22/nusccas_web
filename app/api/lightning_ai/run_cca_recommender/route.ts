@@ -22,8 +22,7 @@ export async function OPTIONS() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-
-        // const url = "https://8000-01jyc5f4xnnk2wrzcmybg4vbgr.cloudspaces.litng.ai/predict"
+        
         const url = process.env.NEXT_PUBLIC_LIT_SERVER_API_URL as string;
         const LIT_SERVER_AUTHORIZATION = process.env.NEXT_PUBLIC_LIT_SERVER_AUTHORIZATION as string;
         
@@ -44,8 +43,8 @@ export async function POST(request: Request) {
             body: JSON.stringify(body),
         };
 
-        console.log(url)
-        console.log(options)
+        //console.log(url)
+        //console.log(options)
         const res = await fetch(url, options); // no response expected
         const resData = await res.json()
         return NextResponse.json(resData);

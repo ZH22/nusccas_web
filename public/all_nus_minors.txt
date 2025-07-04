@@ -1,101 +1,101 @@
+Analytical Chemistry
 Anthropology
+Aquatic Ecology
+Arabic Language Studies
+Architectural Studies
+Art History
+Artificial Intelligence
+Asian Studies
+Astronomy
+Bioinformatics
+Biomedical Engineering
+Biomedical Informatics
+Biophysics
+Botany
+Business Analytics
+Chemistry
+China Studies
 Chinese Language
+Chinese Language Studies
 Chinese Media
 Chinese Studies
 Chinese Translation
+Cities
 Communications and New Media
+Community Development and Leadership
+Computer Science
+Computing (Design and Engineering)
+Computing (Sciences) 
+Cultural Studies
+Data Analytics
+Data Engineering
 Economics
+Engineering Materials
 English Language and Linguistics
 English Literature
-History
-Human Services
-India Studies
-Interpreting
-Japanese Studies
-Malay Studies
-Philosophy
-Political Science
-Psychology
-Sociology
-Southeast Asian Arts and Heritage
-Southeast Asian Studies
-Theatre and Performance Studies
-Visual Cultures
-Aquatic Ecology
-Art History
-Asian Studies
-China Studies
-Cultural Studies
 English Studies
+Entrepreneurship
+Environmental Sustainability
 Film Studies
+Forensic Science
+French Language Studies
 Gender Studies
 Geographical Information Systems
 Geosciences
+German Language Studies
 Global Studies
 Health and Social Sciences
-Interactive Media Development
-Language Science
-Language Studies
-Arabic Language Studies
-Chinese Language Studies
-French Language Studies
-German Language Studies
 Hindi Language Studies
+History
+Human Services
+India Studies
 Indonesian Language Studies
-Japanese Language Studies
-Korean Language Studies
-Malay Language Studies
-Spanish Language Studies
-Thai Language Studies
-Vietnamese Language Studies
-Religious Studies
-Science, Technology and Society
-Urban Studies
-Management
-Entrepreneurship
-Real Estate
-Management of Technology
-Artificial Intelligence
-Business Analytics
-Computer Science
 Information Security
 Information Systems
-Data Engineering
-Architectural Studies
-Biomedical Engineering
-Computing (Design and Engineering)
-Landscape Architectural Studies
-Project Management
-Systems Engineering
-Visual Communication Design 
-Cities
-Engineering Materials
 Infrastructure Management and Finance
 Innovation and Design
-Biomedical Informatics
 Integrative Health
-Music and Society
-Performing Arts
-Public Health
-Analytical Chemistry
-Astronomy
-Bioinformatics
-Biophysics
-Botany
-Chemistry
-Computing (Sciences) 
-Data Analytics
-Forensic Science
+Interactive Media Development
+Interpreting
+Japanese Language Studies
+Japanese Studies
+Korean Language Studies
+Landscape Architectural Studies
+Language Science
+Language Studies
 Life Sciences
+Malay Language Studies
+Malay Studies
+Management
+Management of Technology
 Mathematics
+Medical Physics
 Meteorology and Climate Science
-Environmental Sustainability
+Music and Society
 Nanoscience
 Nutrition
+Performing Arts
 Pharmaceutical Science
+Philosophy
 Physics
 Physics in Technology
-Statistics
+Political Science
+Project Management
+Psychology
+Public Health
 Quantitative Finance
-Medical Physics
-Community Development and Leadership
+Real Estate
+Religious Studies
+Science, Technology and Society
+Sociology
+Southeast Asian Arts and Heritage
+Southeast Asian Studies
+Spanish Language Studies
+Statistics
+Systems Engineering
+Thai Language Studies
+Theatre and Performance Studies
+Urban Studies
+Vietnamese Language Studies
+Visual Communication Design
+Visual Cultures

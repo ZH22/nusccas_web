@@ -94,7 +94,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
           minors: minors,
           ccas: ccas,
           interests: interests,
-          isOnboarded: true // Set onboarded flag to true
+          isOnboarded: true, // Set onboarded flag to true
         })
         .eq("id", user?.id as string);
       if (error) throw error;
@@ -119,18 +119,20 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       const { error } = await supabase
         .from("profiles")
         .update({
-          recommendations: null // Remove previous reccomendation state
+          recommendations: null, // Remove previous reccomendation state
         })
-        .eq("id", user?.id as string); 
+        .eq("id", user?.id as string);
 
-        if (error) {console.log(error)}
+      if (error) {
+        console.log(error);
+      }
 
       fetch(url, options); // no response expected
     } catch (error) {
       console.error(error);
     }
 
-    redirect("/dashboard")
+    redirect("/dashboard");
 
     // =================================================
   }
@@ -155,6 +157,7 @@ export default function OnboardStepper({ user }: { user: User | null }) {
       // backButtonProps={{ className: "cursor-pointer" }}
       nextButtonText="Next"
       // nextButtonProps={{ className: "cursor-pointer " }}
+      stepContainerClassName="px-4"
     >
       <Step>
         <h2 className="text-4xl font-bold">Welcome to nusCCAs!</h2>
@@ -240,13 +243,21 @@ export default function OnboardStepper({ user }: { user: User | null }) {
         <h2 className="text-2xl font-bold pb-2">
           What are your current and past CCAs?
         </h2>
-        <DynamicInputs value={ccas} onValueChange={setCcas} placeholder="New CCA"/>
+        <DynamicInputs
+          value={ccas}
+          onValueChange={setCcas}
+          placeholder="New CCA"
+        />
       </Step>
 
       <Step>
         <h2 className="text-2xl font-bold">What are your interests?</h2>
         <br />
-        <DynamicInputs value={interests} onValueChange={setInterests} placeholder="New Interest"/>
+        <DynamicInputs
+          value={interests}
+          onValueChange={setInterests}
+          placeholder="New Interest"
+        />
       </Step>
 
       <Step>
@@ -254,7 +265,10 @@ export default function OnboardStepper({ user }: { user: User | null }) {
         <br />
         <p>To confirm, please press Complete</p>
         <br></br>
-        <p>Our AI model will then update the perfect CCAs for you. Please allow some time</p>
+        <p>
+          Our AI model will then update the perfect CCAs for you. Please allow
+          some time
+        </p>
       </Step>
 
       {/* onFinalStepCompleted => Callback fired after user finishes the final Step */}

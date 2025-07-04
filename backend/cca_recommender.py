@@ -82,13 +82,18 @@ class ModelAPI(ls.LitAPI):
                 for tag in user_tags:
                     score = tag_scores.get(tag, 0)
 
+                    # means tag is likely total opposite to CCA (e.g. Chinese Dance CCA and 'Indian' tag)
+                    if score < 0.05:
+                        score = -0.5
                     # reduce scores below 0.8 -> they do not mean much, kind of random scoring
-                    if score < 0.8:
-                        score /= 4
-                    # boost the top CCA for each tag
-                    elif score == best_per_tag[tag]:
-                        score *= 2
+                    # reduce scores for race and religion
+                    elif score < 0.8 and score != best_per_tag[tag] or tag in ["Chinese", "Malay", "Indian", "Buddhist", "Christian", "Catholic", "Muslim", "Hindu", "Sikh"]:
+                        score /= 5
 
+                    # boost the top CCA for each tag
+                    if score == best_per_tag[tag]:
+                        score *= 4
+                    
                     adjusted[tag] = score
                 modified_tag_scores.append(adjusted)
 
@@ -102,13 +107,13 @@ class ModelAPI(ls.LitAPI):
 
         top_ccas = rank_ccas(df, user_tags)
 
-        # store top 10 CCAs in JSONB format
-        top_10 = top_ccas[["name", "final_scores"]].head(10)
-        print(top_10)
+        # store top 20 CCAs in JSONB format
+        top_20 = top_ccas[["name", "final_scores"]].head(20)
+        print(top_20)
 
         recommendations = []
         rank = 1
-        for id, row in top_10.iterrows():
+        for id, row in top_20.iterrows():
             name = str(row["name"])
             score = float(row["final_scores"])
             recommendations.append({
@@ -120,7 +125,7 @@ class ModelAPI(ls.LitAPI):
         
         print("Recommendations: ", recommendations)
 
-        # Storing top 10 recommended CCAs into Supabase
+        # Storing top 20 recommended CCAs into Supabase
         response = (
             supabase.table("profiles")
             .update({"recommendations": recommendations})  # python list of dicts
