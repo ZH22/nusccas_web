@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from 'next/navigation'
+import CCAManager from "./ccaManager";
 
 export default async function ManageCCAs() {
   
@@ -15,7 +16,7 @@ export default async function ManageCCAs() {
   if (data?.roles == null){
     return (
       <div className="flex flex-col items-center">
-        <h1 className="font-bold text-4xl">Sorry you're not allowed here</h1>
+        <h1 className="font-bold text-4xl">Sorry you are not allowed here</h1>
         <img src="/unauthorised.svg" className="max-w-lg" />
       </div>
     )
@@ -24,7 +25,8 @@ export default async function ManageCCAs() {
 
   return (
     <div>
-      <h1>Manage CCAs</h1>
+      <h1 className="font-bold text-2xl text-center">Manage CCAs</h1>
+      <CCAManager role={data.roles}/>
     </div>
   );
 }

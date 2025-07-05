@@ -15,7 +15,7 @@ export default async function ManageLeaders() {
   if (data?.roles != "admin"){
     return (
       <div className="flex flex-col items-center">
-        <h1 className="font-bold text-4xl">Sorry you're not allowed here</h1>
+        <h1 className="font-bold text-4xl">Sorry you are not allowed here</h1>
         <img src="/unauthorised.svg" className="max-w-lg" />
       </div>
     )
