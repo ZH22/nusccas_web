@@ -1,79 +1,79 @@
+Accountancy
 Anthropology
+Applied Business Analytics
+Architecture
+Artificial Intelligence
+Biomedical Engineering
+Biomedical Informatics
+Business Administration
+Business Analytics
+Business Artificial Intelligence Systems
+Business Economics
+Chemical Engineering
+Chemistry
 Chinese Language
 Chinese Studies
+Civil Engineering
 Communications and New Media
-Economics
-English Language and Linguistics
-English Literature
-Geography
-Global Studies
-History
-Japanese Studies
-Malay Studies
-Philosophy
-Political Science
-Psychology
-Social Work
-Sociology
-South Asian Studies
-Southeast Asian Studies
-Theatre and Performance Studies
-Philosophy, Political Science, and Economics
-Chemistry
+Computer Engineering
+Computer Science
+Computing (Design and Engineering)
 Computing (Sciences)
 Data Analytics
 Data Science and Analytics
 Data Science and Economics
-Environmental Studies
-Food Science
-Food Science and Technology
-Life Sciences
-Mathematics
-Nutrition
-Pharmaceutical Science
-Pharmacy
-Physics
-Quantitative Finance
-Statistics
-Business Administration
-Accountancy
-Applied Business Analytics
-Business Economics
-Finance
-Innovation and Entrepreneurship
-Leadership and Human Capital Management
-Marketing
-Operations and Supply Chain Management
-Real Estate
-Computer Science
-Information Security
-Business Analytics
-Business Artificial Intelligence Systems
-Artificial Intelligence
-Computer Engineering
 Dentistry
-Architecture
-Biomedical Engineering
-Chemical Engineering
-Civil Engineering
-Computing (Design and Engineering)
+Economics
 Electrical Engineering
 Engineering Science
+English Language and Linguistics
+English Literature
 Environmental and Sustainability Engineering
+Environmental Studies
+Finance
+Food Science
+Food Science and Technology
+Geography
+Global Studies
+History
 Industrial and Systems Engineering
 Industrial Design
+Information Security
 Infrastructure and Project Management
 Innovation & Design
+Innovation and Entrepreneurship
+Japanese Studies
 Landscape Architecture
+Law
+Leadership and Human Capital Management
+Life Sciences
+Malay Studies
+Marketing
 Materials Science and Engineering
+Mathematics
 Mechanical Engineering
+Medicine
+Music
+Nursing
+Nutrition
+Operations and Supply Chain Management
+Performing Arts
+Pharmaceutical Science
+Pharmacy
+Philosophy
+Philosophy, Political Science, and Economics
+Physics
+Political Science
+Psychology
+Public Health
+Quantitative Finance
+Real Estate
 Robotics and Machine Intelligence
+Social Work
+Sociology
+South Asian Studies
+Southeast Asian Studies
+Statistics
 Sustainable Urban Development
 Systems Engineering
-Law
-Biomedical Informatics
-Medicine
-Nursing
-Music
-Performing Arts
-Public Health
+Theatre and Performance Studies
