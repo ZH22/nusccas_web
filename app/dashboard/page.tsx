@@ -5,8 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2 } from "lucide-react";
 import RecoGrid from "./RecoGrid";
 import Footer from "@/components/landingPageComponents/Footer";
-
-
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -30,7 +30,7 @@ export default async function Dashboard() {
 
   const { data } = await supabase
     .from("profiles")
-    .select("recommendations, isOnboarded")
+    .select("recommendations, isOnboarded, roles")
     .eq("id", user?.id)
     .single();
 
@@ -55,9 +55,23 @@ export default async function Dashboard() {
 
   return(
     <>
+      <h2 className="text-center text-5xl font-bold">Dashboard</h2>
+
+      {/* If Admin or CCA Leaders (will see) */}
+      {data.roles !== null && 
+        <div className="flex max-w-5xl m-auto p-3 gap-5 border-green-700 border-2 rounded-2xl mt-3">
+          <Button variant={"ghost"}>Admin Features:</Button>
+          <Link href={"/manage/ccas"}>
+            <Button variant={"outline"} className="cursor-pointer">Manage CCAs</Button>
+          </Link>
+          {data.roles == "admin" && <Link href={"/manage/leaders"}>
+            <Button variant={"outline"} className="cursor-pointer">Manage Leaders</Button>
+          </Link>}
+        </div>
+      }
+
       { (data?.isOnboarded && !data.recommendations) && 
         <div>
-          <h2 className="text-center text-5xl font-bold">Dashboard</h2>
           <div className="relative py-5 max-w-4xl m-auto">
             <div className="bg-gray-200 dark:bg-gray-700 p-5 rounded-2xl mb-10">
               <h3 className="text-xl">Your Recommendations are pending! Come back and refresh in a few minutes</h3>
@@ -77,7 +91,6 @@ export default async function Dashboard() {
 
       { (data?.isOnboarded && data.recommendations) && 
         <div>
-          <h2 className="text-center text-5xl font-bold">Dashboard</h2>
           <div className="bg-gray-200 dark:bg-gray-700 p-5 rounded-2xl max-w-5xl m-auto mt-5">
             <h3 className="text-2xl text-center">Your Recommended CCAs!</h3>
           </div>

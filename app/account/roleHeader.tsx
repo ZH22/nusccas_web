@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 
+import { toast } from "sonner";
+
 export default function RoleHeader({role, id}: {role: string|null, id: string}) {
   const router = useRouter();
 
@@ -20,6 +22,7 @@ export default function RoleHeader({role, id}: {role: string|null, id: string}) 
     else {
       router.refresh()
       console.log("reloaded")
+      toast.info(`Account has been updated to ${newRole ? newRole.toUpperCase() : "NORMAL"}`)
     }
   }
 

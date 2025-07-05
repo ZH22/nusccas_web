@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { PencilLine } from 'lucide-react'
 import RoleHeader from './roleHeader'
 
+import { Toaster } from 'sonner'
+
 export default async function Account() {
   const supabase = await createClient()
   const {data: { user }, error} = await supabase.auth.getUser()
@@ -38,6 +40,7 @@ export default async function Account() {
         </Link>
       </div>
       <AccountForm user={user} /> 
+      <Toaster position="top-center" richColors/>
     </div>
   )
 }
