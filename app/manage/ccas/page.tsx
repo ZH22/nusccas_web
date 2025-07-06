@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from 'next/navigation'
 import CCAManager from "./ccaManager";
+import Image from "next/image";
 
 export default async function ManageCCAs() {
   
@@ -17,7 +18,7 @@ export default async function ManageCCAs() {
     return (
       <div className="flex flex-col items-center">
         <h1 className="font-bold text-4xl">Sorry you are not allowed here</h1>
-        <img src="/unauthorised.svg" className="max-w-lg" />
+        <Image alt="Unauthorised" src="/unauthorised.svg" className="max-w-lg" />
       </div>
     )
   }

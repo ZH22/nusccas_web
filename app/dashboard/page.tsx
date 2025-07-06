@@ -8,6 +8,14 @@ import Footer from "@/components/landingPageComponents/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import CurrentCCAGrid from "./CurrentCCAGrid";
+
 export default async function Dashboard() {
   const supabase = await createClient();
 
@@ -59,7 +67,7 @@ export default async function Dashboard() {
 
       {/* If Admin or CCA Leaders (will see) */}
       {data.roles !== null && 
-        <div className="flex max-w-5xl m-auto p-3 gap-5 border-green-700 border-2 rounded-2xl mt-3">
+        <div className="flex max-w-5xl m-auto p-3 gap-5 border-green-700 border-2 rounded-2xl mt-3 flex-wrap">
           <Button variant={"ghost"}>Admin Features:</Button>
           <Link href={"/manage/ccas"}>
             <Button variant={"outline"} className="cursor-pointer">Manage CCAs</Button>
@@ -70,6 +78,21 @@ export default async function Dashboard() {
         </div>
       }
 
+      {/* CURRENT CCAS ============================================================================================ */}
+       <Accordion type="single" collapsible defaultValue="currentCCAs">
+        <AccordionItem value="currentCCAs">
+          <div className=" bg-blue-200 dark:bg-blue-700 px-5 rounded-2xl max-w-5xl m-auto mt-5">
+            <AccordionTrigger>
+              <h3 className="text-xl text-center">Your CCAs!</h3>
+            </AccordionTrigger>
+          </div>
+          <AccordionContent>
+            <CurrentCCAGrid />
+          </AccordionContent>
+        </AccordionItem>
+       </Accordion>
+
+      {/* RECOMMENDED ============================================================================================ */}
       { (data?.isOnboarded && !data.recommendations) && 
         <div>
           <div className="relative py-5 max-w-4xl m-auto">
@@ -90,14 +113,24 @@ export default async function Dashboard() {
       }
 
       { (data?.isOnboarded && data.recommendations) && 
-        <div>
-          <div className="bg-gray-200 dark:bg-gray-700 p-5 rounded-2xl max-w-5xl m-auto mt-5">
-            <h3 className="text-2xl text-center">Your Recommended CCAs!</h3>
-          </div>
-          <div className="relative py-5 max-w-5xl m-auto">
-            <RecoGrid /> 
-          </div>
-        </div> 
+        <Accordion type="single" collapsible defaultValue="recommendedCCAs">
+
+          <AccordionItem value="recommendedCCAs">
+            <div className=" bg-gray-200 dark:bg-gray-700 px-5 rounded-2xl max-w-5xl m-auto mt-5">
+              <AccordionTrigger>
+                <h3 className="text-xl text-center">Your Recommended CCAs! 
+                  <span className="font-light text-sm italic">🤖Model Guided Recommendation🤖</span>
+                </h3>
+              </AccordionTrigger>
+            </div>
+            <AccordionContent>
+              <div className="relative py-5 max-w-5xl m-auto">
+                <RecoGrid /> 
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+        </Accordion> 
       }
 
       <Footer />

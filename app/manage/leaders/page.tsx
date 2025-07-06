@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server"
+import Image from "next/image";
 import { redirect } from 'next/navigation'
 
 export default async function ManageLeaders() {
@@ -16,7 +17,7 @@ export default async function ManageLeaders() {
     return (
       <div className="flex flex-col items-center">
         <h1 className="font-bold text-4xl">Sorry you are not allowed here</h1>
-        <img src="/unauthorised.svg" className="max-w-lg" />
+        <Image alt="Unauthorised" src="/unauthorised.svg" className="max-w-lg" />
       </div>
     )
   }
