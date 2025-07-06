@@ -27,7 +27,7 @@ export default async function ManageCCAs() {
   return (
     <div>
       <h1 className="font-bold text-2xl text-center">Manage CCAs</h1>
-      <CCAManager role={data.roles}/>
+      <CCAManager role={data.roles} user={user}/>
     </div>
   );
 }

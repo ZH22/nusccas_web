@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar"
+import Link from "next/link"
 
 type CCA = {
   id: number;
@@ -55,9 +56,11 @@ export default function CurrentCCAGrid() {
           {cca.name}
         </Button>
       )}
-      <Button key="more" variant={"outline"} className="cursor-pointer bg-gray-200 border-gray-400">
-        Add More....
-      </Button>
+      <Link href="/manage/myccas">
+        <Button key="more" variant={"outline"} className="w-full cursor-pointer bg-gray-200 border-gray-400">
+            Add More....
+        </Button>
+      </Link>
     </div>
   )
 }

@@ -37,7 +37,7 @@ export const columns: ColumnDef<CCA>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Branch
           <ArrowUpDown />
         </Button>
       )
