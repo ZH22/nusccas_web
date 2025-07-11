@@ -67,7 +67,7 @@ export default function ccaPage({ id }: { id: number }) {
         )}
         {cca.website_url && (
           <Link href={cca.website_url} target="_blank" className="flex gap-2">
-            Sign up on NUSync
+            Join on NUSync
             <SchoolIcon />
           </Link>
         )}
