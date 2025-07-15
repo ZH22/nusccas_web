@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
@@ -36,7 +36,7 @@ export default function ReviewSection({
   const supabase = createClient();
 
   // fetches all reviews for the particular CCA from Supabase
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     const { data: reviewData, error: reviewError } = await supabase
       .from("reviews")
       .select(
@@ -48,13 +48,13 @@ export default function ReviewSection({
     if (reviewError) throw reviewError;
 
     setReviews(reviewData as unknown as Review[]);
-  };
+  }, [cca, supabase]);
 
   // uploads newly written review to Supabase
   const handleSubmit = async () => {
     if (formData === "") return; // do nothing if nothing written as review
 
-    const { data: submitData, error: submitError } = await supabase
+    const { error: submitError } = await supabase
       .from("reviews")
       .insert({ user_id: user?.id, cca_id: cca, message: formData });
 
@@ -72,7 +72,7 @@ export default function ReviewSection({
   // edits review message data in Supabase
   const handleEditSave = async (review: Review) => {
     if (editedMessage !== review.message && editedMessage !== "") {
-      const { data: submitEditData, error: submitEditError } = await supabase
+      const { error: submitEditError } = await supabase
         .from("reviews")
         .update({ message: editedMessage, edited_at: new Date().toISOString() })
         .eq("id", editingId);
@@ -87,7 +87,7 @@ export default function ReviewSection({
 
   // deletes whole review from Supabase
   const handleDelete = async (review: Review) => {
-    const { data: deleteData, error: deleteError } = await supabase
+    const { error: deleteError } = await supabase
       .from("reviews")
       .delete()
       .eq("id", review.id);
@@ -99,7 +99,7 @@ export default function ReviewSection({
 
   useEffect(() => {
     fetchReviews();
-  }, [cca]);
+  }, [fetchReviews]);
 
   return (
     <div className="flex flex-col gap-4">

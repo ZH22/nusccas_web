@@ -18,7 +18,7 @@ type CCA = {
   branch: string;
 };
 
-export default function ccaPage({ id }: { id: number }) {
+export default function CcaPage({ id }: { id: number }) {
   const [cca, setCCA] = useState<CCA | null>(null);
 
   useEffect(() => {
