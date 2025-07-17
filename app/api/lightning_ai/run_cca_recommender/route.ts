@@ -43,8 +43,6 @@ export async function POST(request: Request) {
             body: JSON.stringify(body),
         };
 
-        //console.log(url)
-        //console.log(options)
         const res = await fetch(url, options); // no response expected
         const resData = await res.json()
         return NextResponse.json(resData);

@@ -17,7 +17,7 @@ type CCA = {
   ig_url: string;
 }
 
-const PlaceholderCards = ({ className }: {className?:string}) => {
+export const PlaceholderCards = ({ className }: {className?:string}) => {
   return (
     <div className={className + ` flex flex-col space-y-3`}>
       <Skeleton className="h-[125px] w-[250px] rounded-xl m-auto mb-3 dark:bg-slate-800 bg-slate-300" />
@@ -79,7 +79,7 @@ export default function RecoGrid() {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-10 m-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-10 mx-3 md:mx-0 m-auto">
       {ccas?.map((cca) =>
         <RecoCard key={cca.id} title={cca.name} description={cca.description} imgSrc={cca.logo_url} ccaUrl={cca.website_url} topCCAs={topCcaNames}/>
       )}
