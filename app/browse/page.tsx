@@ -1,5 +1,4 @@
-
-import AllCCAList from "./all-cca-list"
+import AllCCAList from "./all-cca-list-updated";
 
 export default function BrowsePage() {
   return (
@@ -9,5 +8,5 @@ export default function BrowsePage() {
         <AllCCAList />
       </div>
     </>
-  )
+  );
 }
