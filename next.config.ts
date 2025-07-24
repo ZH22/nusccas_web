@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'se-images.campuslabs.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'oxttowgsypcnbeobqril.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
     ],
   },
 };
