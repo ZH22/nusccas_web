@@ -61,8 +61,6 @@ export default function EventPage({ id }: { id: number }) {
 
   if (!event) return <div>Loading...</div>;
 
-  console.log("Host CCAs", hostCCAs);
-
   return (
     <div>
       <div className="display: flex mb-4">
