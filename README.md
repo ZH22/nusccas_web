@@ -44,7 +44,7 @@ We hope to provide a One-Stop, Easy-to-Use and Personalised web application to h
 
 ### Model View Controller Architecture
 
-![GeneralWorkflow_06052925](https://github.com/user-attachments/assets/6dcbb779-51eb-4428-a4ad-3475872c2baa)
+![GeneralWorkflow_06052925](https://github.com/user-attachments/assets/4478674e-530d-4b17-bff3-73a2206fee02)
 
 ## Getting Started
 
